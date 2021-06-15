@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+
+{% block title %}Add Post{% endblock title %}
+
+{% block body %}
+<br>
+<h2>New Post</h2>
+<hr>
+<form class="post-form" method="POST">
+
+{% csrf_token %}
+
+{{form.as_p}}
+
+<button class="btn btn-info" type="submit">Save</button>
+</form>
+
+
+
+{% endblock body %}
+
+
+{% block script %}
+var editor = new MediumEditor('.editable');
+{% endblock script %}

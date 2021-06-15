@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+
+
+{% block title %} About {% endblock title %} 
+{% block body %}
+
+<br>
+<div class="container">
+{% if not user.is_authenticated %}
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  <strong>Oh snap!</strong> <a href="{% url 'login' %}" class="alert-link">Log in</a> and start posting blogs.
+</div>
+{% endif %} 
+
+<div class="card border-success mb-3" style="width:100%">
+  <div class="card-header">Welcome</div>
+  <div class="card-body">
+    <h4 class="card-title">Easy Blogs</h4>
+    <p class="card-text">Welcome to our simple web application made with Django.</p>
+  </div>
+</div>
+</div>
+ {% endblock body %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %} 
+
+
+{% block title %}Search: {{search}} {% endblock title %} 
+{% block body %}
+<div class="container">
+
+<h1>"{{search}}"</h1>
+
+<style>
+h1{
+    color:red;
+}
+.open_link:hover{
+    color:red;
+}
+</style>
+{% if allposts|length == 0 %}
+<div class="alert alert-danger">
+  No results found. Please try with another text.
+</div>
+
+{% else %}
+{% for post in allposts %}
+<div class="card border-secondary mb-3" style="max-width: 20rem;display: inline-block;">
+  <div class="card-header">{{post.category}}</div>
+  <div class="card-body">
+    {% if not post.title|length < 20 %}
+    <h4 class="card-title">{{post.title|slice:"0:20"}}<span>...</span></h4>
+    {% else %}
+    <h4 class="card-title">{{post.title}}</h4>
+    {% endif %}
+    <p class="card-text">{{post.text|slice:"0:100"}}<span>...</span><a class="open_link" href="/post/{{post.id}}">Continue Reading</a></p>
+  </div>
+</div>
+{% endfor %}
+
+{% endif %}
+</div>
+{% endblock body %}

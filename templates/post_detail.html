@@ -1,0 +1,92 @@
+{% extends 'base.html' %} 
+
+
+{% block title %} {{post.title}} {% endblock title %} 
+
+{% block body %}
+
+<div class="container">
+<br>
+<div class="card mb-3">
+  <h3 class="card-header">Category: {{post.category}}</h3>
+  <div class="card-body">
+    <h5 class="card-title">Title: {{post.title|title}}</h5>
+  </div>
+  
+  <div class="card-body">
+    <p class="card-text">{{post.text}}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><a class="btn btn-outline-secondary" href="/posts/category/{{post.category}}">Find more on this category</a></li>
+    <li class="list-group-item"><a class="btn btn-outline-info" href="/author/posts/{{post.author_id}}">Find more from this author</a></li>
+  </ul>
+  <div class="card-body">
+  {% if not post.id == 1 %}
+    <a href="/post/{{post.id|add:"-1"}}" class="card-link">Previous Post</a>
+  {% endif %}
+    
+{% if not post.id == total %}
+<a href="/post/{{post.id|add:"1"}}" class="card-link">Next Post</a>
+{% endif %}
+
+{% if post.published_date %}
+  </div>
+  <div class="card-footer text-muted">
+   Published on: {{post.published_date|date:'Y-m-d'}}
+  </div>
+</div>
+{% else %}
+<a class="btn btn-info" href="{% url 'post_publish' pk=post.pk %}"> Publish </a>
+{% endif %}
+
+{% if user.is_authenticated %}
+<a class="btn btn-primary" href="{% url 'post_edit' pk=post.pk %}"><i class="fas fa-pencil-alt"></i></a>
+<a class="btn btn-primary" href="{% url 'post_remove' pk=post.pk %}"><i class="fas fa-trash-alt"></i></span></a>
+{% endif %}
+<hr>
+<a class="btn btn-primary btn-comment" href="{% url 'add_comment_to_post' pk=post.pk %}">Add Comment </a>
+<hr>
+<!--POSTS-->
+
+<h2 class="text-info">Comments</h2>
+
+{% for comment in post.comments.all %}
+
+{% if user.is_authenticated or comment.approved_comments %}
+
+<div class="card border-info mb-3" >
+{% if not comment.approved_comments %}
+  <div class="card-body">
+    <h4 class="card-title">{{comment.author}}</h4>
+    <p class="card-text">{{comment.text}}</p>
+    <a class="btn btn-success" href="{% url 'comment_approve' pk=comment.pk %}">Approve</a>
+    <a class="btn btn-danger" href="{% url 'comment_remove' pk=comment.pk %}">Remove</a>
+    
+  
+  {% else %}
+
+  {% if user.is_authenticated %}
+
+    <div class="card-body">
+    <h4 class="card-title">{{comment.author}}</h4>
+    <p class="card-text">{{comment.text}}</p>
+    <a class="btn btn-danger" href="{% url 'comment_remove' pk=comment.pk %}">Remove</a>
+
+  {% else %}
+<div class="card-body">
+    <h4 class="card-title">{{comment.author}}</h4>
+    <p class="card-text">{{comment.text}}</p>
+    {% endif %}
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% empty %}
+<p>No Comments</p>
+{% endfor %}
+
+
+</div>
+
+{% endblock body %}
+

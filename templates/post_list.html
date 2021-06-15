@@ -1,0 +1,45 @@
+{% extends 'base.html' %} 
+
+
+{% block title %} Easy Blogs {% endblock title %} 
+{% block body %}
+<div class="container">
+
+
+
+<style>
+h1{
+    color:red;
+}
+.open_link:hover{
+    color:red;
+}
+</style>
+
+{% if not post_list %}
+
+<h1>No Posts</h1>
+
+{% else %}
+
+
+<h1>Latest Posts</h1>
+{% for post in post_list %}
+<div class="card border-secondary mb-3" style="max-width: 20rem;display: inline-block;">
+  <div class="card-header">{{post.category}}</div>
+  <div class="card-body">
+    {% if not post.title|length < 20 %}
+    <h4 class="card-title">{{post.title|slice:"0:20"}}<span>...</span></h4>
+    {% else %}
+    <h4 class="card-title">{{post.title}}</h4>
+    {% endif %}
+    <p class="card-text">{{post.text|slice:"0:100"}}<span>...</span><a class="open_link" href="{% url 'post_detail' pk=post.pk %}">Continue Reading</a></p>
+    <p class="card-text">Comments: {{ post.comments.count }}</p>
+  </div>
+</div>
+{% endfor %}
+
+
+</div>
+{% endif %}
+{% endblock body %}

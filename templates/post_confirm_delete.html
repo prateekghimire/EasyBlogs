@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<form method="POST">
+
+{% csrf_token %}
+<hr>
+<h3>Are you sure you want to  delete this blog ?</h3>
+
+<input type="submit" class='btn btn-danger' value="Confirm" >
+
+
+</form>
+
+{% endblock body %}

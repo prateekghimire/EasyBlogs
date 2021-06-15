@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Drafts{% endblock title %}
+
+
+{% block body %}
+<br>
+{% for post in post_list  %}
+
+<div class="card border-secondary mb-3" style="max-width: 20rem;display: inline-block;">
+  <div class="card-header">{{post.category}}</div>
+  <div class="card-body">
+    
+    <h4 class="card-title">{{post.title|slice:"0:20"}}</h4>
+    
+    <p class="card-text">{{post.text|slice:"0:50"}}<span>...</span></p>
+    <a class="btn btn-success" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+    <a class="btn btn-danger" href="{% url 'post_remove' pk=post.pk %}">Delete</a>
+
+    
+  </div>
+</div>
+
+
+{% endfor %}
+
+
+{% endblock body %}
