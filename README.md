@@ -1,0 +1,1 @@
+# EasyBlogs - Django blog app
