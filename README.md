@@ -1,1 +1,1 @@
-# EasyBlogs - Django blog app
+# **EasyBlogs - Django blog app**
