@@ -7,4 +7,4 @@ Visit this [link](https://blogsmadeeasy.herokuapp.com/) to use an application.
   1. Download and extract the files
   2. Install all the dependencies mentioned on requirements.txt file
   3. Make migrations of the application
-  4. run python manage.py runserver command
+  4. Run django app
