@@ -12,15 +12,14 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as auth_login
 
-all_categories = set(Post.objects.values_list('category', flat=True))
-all_categories = [x.lower() for x in list(all_categories)]
-all_categories = set(sorted(all_categories))
-
 
 class AboutView(TemplateView):
     template_name = 'about.html'
 
     def get_context_data(self, **kwargs):
+        all_categories = set(Post.objects.values_list('category', flat=True))
+        all_categories = [x.lower() for x in list(all_categories)]
+        all_categories = set(sorted(all_categories))
         context = super().get_context_data(**kwargs)
         context["categories"] = all_categories
         return context
@@ -34,6 +33,9 @@ class PostListView(ListView):
         return Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
 
     def get_context_data(self, **kwargs):
+        all_categories = set(Post.objects.values_list('category', flat=True))
+        all_categories = [x.lower() for x in list(all_categories)]
+        all_categories = set(sorted(all_categories))
         context = super().get_context_data(**kwargs)
         context["categories"] = all_categories
         return context
@@ -151,6 +153,9 @@ def search(request):
 
 
 def category(request, category):
+    all_categories = set(Post.objects.values_list('category', flat=True))
+    all_categories = [x.lower() for x in list(all_categories)]
+    all_categories = set(sorted(all_categories))
     totalcount = Post.objects.count()
     allposts = Post.objects.filter(category=category).values()
     context = {'total': totalcount, 'allposts': allposts,
