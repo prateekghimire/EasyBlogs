@@ -1,25 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block title %}Add Comment{% endblock title %} {%
+block body %}
 
-{% block title %}Add Comment{% endblock title %}
-
-{% block body %}
-
-<h1> New Comment </h1>
+<h1>New Comment</h1>
 
 <form class="post-form" method="POST">
+  {% csrf_token %} {{form.as_p}}
 
-{% csrf_token %}
-
-{{form.as_p}}
-
-<button type="submit" class="save btn btn-success">Post Comment</button>
-
+  <button type="submit" class="save btn btn-success">Post Comment</button>
 </form>
 
 {% endblock body %}
-
-
-<!--
-{% block script %}
-var editor = new MediumEditor('.editable');
-{% endblock script %}-->
