@@ -2,20 +2,10 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
-<<<<<<< HEAD
-#from tinymce.models import HTMLField
-=======
-from tinymce.models import HTMLField
->>>>>>> 87e7c0fceff414002045194faee3a6194aa93e87
 # Create your models here.
 
 
 class Post(models.Model):
-<<<<<<< HEAD
-    #content = HTMLField()
-=======
-    content = HTMLField()
->>>>>>> 87e7c0fceff414002045194faee3a6194aa93e87
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=50)
     title = models.CharField(max_length=200, null=True)
