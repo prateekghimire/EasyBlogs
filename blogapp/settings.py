@@ -34,6 +34,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['blogsmadeeasy.herokuapp.com', '127.0.0.1']
 
+DEBUG_PROPAGATE_EXCEPTIONS = True
 
 # Application definition
 
@@ -95,24 +96,30 @@ WSGI_APPLICATION = 'blogapp.wsgi.application'
 #db_from_env = dj_database_url.config(conn_max_age=600)
 # DATABASES['default'].update(db_from_env)
 
+# DATABASES = {
+
+#     'default': {
+
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+#         'NAME': 'dbuir8jsvk6g0m',
+
+#         'USER': 'dnsktfirtulgjo',
+
+#         'PASSWORD': 'a89902b83345bb5ab916d033c650fb9c93946953afdf924b10d8be3d57372047',
+
+#         'HOST': 'ec2-35-168-145-180.compute-1.amazonaws.com',
+
+#         'PORT': '5432',
+
+#     }
+
+# }
 DATABASES = {
-
     'default': {
-
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': 'dbuir8jsvk6g0m',
-
-        'USER': 'dnsktfirtulgjo',
-
-        'PASSWORD': 'a89902b83345bb5ab916d033c650fb9c93946953afdf924b10d8be3d57372047',
-
-        'HOST': 'ec2-35-168-145-180.compute-1.amazonaws.com',
-
-        'PORT': '5432',
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-
 }
 
 # Password validation
